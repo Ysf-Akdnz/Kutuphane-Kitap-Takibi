@@ -1,0 +1,52 @@
+﻿@using deneme2.Models.Entity
+@model List<Kitaplar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kitap Listesi</h2>
+
+<div class="container">
+    @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <div style="width:25%;float:left">
+                        @Html.TextBox("arama", null, new { @class="form-control", @placeholder="Aranacak Kitap Adı/Yazarı/Türü" })
+                    </div>
+                    <div style="float:left;margin-left:-5px">
+                        @Html.ActionLink("Ara", "Index", null, new { @class="btn btn-info", onclick="$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;"})
+                    </div>
+                </div>
+            }
+</div>
+
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Kitap Adı</th>
+            <td>Sayfa Sayısı</td>
+            <td>Cilt Numarası</td>
+            <td>Türü</td>
+            <td>Yazarı</td>
+            <td>Basım Tarihi</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kitaplar in Model)
+        {
+            <tr>
+                <td>@kitaplar.Id</td>
+                <td>@kitaplar.Kitap_adi</td>
+                <td>@kitaplar.Sayfa_Sayisi</td>
+                <td>@kitaplar.Cilt_No</td>
+                <td>@kitaplar.Turu</td>
+                <td>@kitaplar.Yazar</td>
+                <td>@kitaplar.Basim_Tarihi</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
